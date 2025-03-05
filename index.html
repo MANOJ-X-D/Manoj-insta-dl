@@ -36,6 +36,14 @@
             margin-bottom: 20px;
             animation: fadeIn 3s ease-in-out;
         }
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
         .button {
             background-color: #fff;
             color: #833ab4;
@@ -65,11 +73,43 @@
 </head>
 <body>
     <div class="container">
-        <h1>Instagram Reels Downloader</h1>
+        <h1>Manoj Instagram Reels Downloader</h1>
         <p>Download Instagram Reels videos in high quality for free. No registration required.</p>
         <p><strong>Fast & Easy</strong></p>
         <p>Download Instagram Reels in seconds with just a few clicks. No complicated process.</p>
-        <button class="button">Download Now</button>
+        <input type="text" id="reelLink" class="input-field" placeholder="Instagram Reels Link">
+        <button class="button" onclick="downloadReel()">Download Now</button>
     </div>
+
+    <script>
+        function downloadReel() {
+            const reelLink = document.getElementById('reelLink').value;
+
+            if (!reelLink) {
+                alert("कृपया Instagram Reels का लिंक डालें।");
+                return;
+            }
+
+            // यहां आपको अपने API का उपयोग करना होगा
+            // उदाहरण के लिए, RapidAPI पर एक Instagram Reels डाउनलोडर API का उपयोग करें
+            // नीचे दिया गया कोड सिर्फ एक उदाहरण है
+
+            const apiUrl = `https://your-api-endpoint.com/download?url=${encodeURIComponent(reelLink)}`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.url) {
+                        window.location.href = data.url; // डाउनलोड लिंक पर रीडायरेक्ट करें
+                    } else {
+                        alert("डाउनलोड लिंक प्राप्त करने में त्रुटि हुई।");
+                    }
+                })
+                .catch(error => {
+                    console.error("त्रुटि:", error);
+                    alert("डाउनलोड करने में त्रुटि हुई।");
+                });
+        }
+    </script>
 </body>
 </html>
